@@ -1,0 +1,22 @@
+diff --git a/src/usb.c b/src/usb.c
+index 9c30055..fde7267 100644
+--- a/src/usb.c
++++ b/src/usb.c
+@@ -347,7 +347,7 @@ static void get_langid_callback(struct libusb_transfer *transfer)
+ 	libusb_fill_control_setup(transfer->buffer, LIBUSB_ENDPOINT_IN, LIBUSB_REQUEST_GET_DESCRIPTOR,
+ 			(uint16_t)((LIBUSB_DT_STRING << 8) | usbdev->devdesc.iSerialNumber),
+ 			langid, 1024 + LIBUSB_CONTROL_SETUP_SIZE);
+-	libusb_fill_control_transfer(transfer, usbdev->dev, transfer->buffer, get_serial_callback, usbdev, 1000);
++	libusb_fill_control_transfer(transfer, usbdev->dev, transfer->buffer, get_serial_callback, usbdev, 10000);
+
+ 	if((res = libusb_submit_transfer(transfer)) < 0) {
+ 		usbmuxd_log(LL_ERROR, "Could not request transfer for device %d-%d: %s", usbdev->bus, usbdev->address, libusb_error_name(res));
+@@ -575,7 +575,7 @@ static int usb_device_add(libusb_device* dev)
+ 	 * 	device.
+ 	 **/
+ 	libusb_fill_control_setup(transfer_buffer, LIBUSB_ENDPOINT_IN, LIBUSB_REQUEST_GET_DESCRIPTOR, LIBUSB_DT_STRING << 8, 0, 1024 + LIBUSB_CONTROL_SETUP_SIZE);
+-	libusb_fill_control_transfer(transfer, handle, transfer_buffer, get_langid_callback, usbdev, 1000);
++	libusb_fill_control_transfer(transfer, handle, transfer_buffer, get_langid_callback, usbdev, 10000);
+
+ 	if((res = libusb_submit_transfer(transfer)) < 0) {
+ 		usbmuxd_log(LL_ERROR, "Could not request transfer for device %d-%d: %s", usbdev->bus, usbdev->address, libusb_error_name(res));
