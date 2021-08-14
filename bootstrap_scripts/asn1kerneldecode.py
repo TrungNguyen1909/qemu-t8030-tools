@@ -1,5 +1,6 @@
 import sys
 from pyasn1.codec.der.decoder import decode as der_decoder
+import liblzfse
 
 def decode(data):
     try:
@@ -19,5 +20,7 @@ def decode(data):
 
 if __name__ == "__main__":
     data = open(sys.argv[1], "rb").read()
-    out_data = decode(data)
+    out_data = bytes(decode(data))
+    if out_data.startswith(b'bvx'):
+    	out_data = liblzfse.decompress(bytes(decode(data)))
     open(sys.argv[2], "wb").write(bytearray(out_data))

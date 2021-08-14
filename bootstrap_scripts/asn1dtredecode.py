@@ -19,5 +19,7 @@ def decode(data):
 
 if __name__ == "__main__":
     data = open(sys.argv[1], "rb").read()
-    out_data = liblzfse.decompress(bytes(decode(data)))
+    out_data = bytes(decode(data))
+    if out_data.startswith(b'bvx'):
+    	out_data = liblzfse.decompress(bytes(decode(data)))
     open(sys.argv[2], "wb").write(bytearray(out_data))
