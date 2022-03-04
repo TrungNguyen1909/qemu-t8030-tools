@@ -1,15 +1,3 @@
-diff --git a/configure.ac b/configure.ac
-index 2e12bae..66dd17b 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -35,6 +35,7 @@ AM_PROG_CC_C_O
- AC_PROG_LIBTOOL
-
- # Checks for libraries.
-+AC_SEARCH_LIBS([pthread_create], [pthread])
- PKG_CHECK_MODULES(libirecovery, libirecovery-1.0 >= $LIBIRECOVERY_VERSION)
- PKG_CHECK_MODULES(libimobiledevice, libimobiledevice-1.0 >= $LIBIMOBILEDEVICE_VERSION)
- PKG_CHECK_MODULES(libplist, libplist-2.0 >= $LIBPLIST_VERSION)
 diff --git a/src/asr.c b/src/asr.c
 index a1aba76..7535bd0 100644
 --- a/src/asr.c
