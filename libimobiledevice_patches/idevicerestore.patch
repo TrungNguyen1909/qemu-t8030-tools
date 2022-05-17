@@ -1,9 +1,9 @@
 diff --git a/configure.ac b/configure.ac
-index 2e12bae..66dd17b 100644
+index 3815275..7a3b6bc 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -35,6 +35,7 @@ AM_PROG_CC_C_O
- AC_PROG_LIBTOOL
+@@ -37,6 +37,7 @@ AM_PROG_CC_C_O
+ LT_INIT
 
  # Checks for libraries.
 +AC_SEARCH_LIBS([pthread_create], [pthread])
@@ -44,10 +44,10 @@ index a1aba76..7535bd0 100644
  		size = ASR_PAYLOAD_CHUNK_SIZE;
  		if (i < ASR_PAYLOAD_CHUNK_SIZE) {
 diff --git a/src/idevicerestore.c b/src/idevicerestore.c
-index fa25ff4..6e0db90 100644
+index b0572ca..b0b6a9e 100644
 --- a/src/idevicerestore.c
 +++ b/src/idevicerestore.c
-@@ -1018,6 +1018,11 @@ int idevicerestore_start(struct idevicerestore_client_t* client)
+@@ -1033,6 +1033,11 @@ int idevicerestore_start(struct idevicerestore_client_t* client)
  	}
 
  	idevicerestore_progress(client, RESTORE_STEP_PREPARE, 0.2);
@@ -60,10 +60,10 @@ index fa25ff4..6e0db90 100644
  	/* retrieve shsh blobs if required */
  	if (tss_enabled) {
 diff --git a/src/restore.c b/src/restore.c
-index e090594..9fcec8a 100644
+index 257cc38..601e80c 100644
 --- a/src/restore.c
 +++ b/src/restore.c
-@@ -296,6 +296,15 @@ irecv_device_t restore_get_irecv_device(struct idevicerestore_client_t* client)
+@@ -302,6 +302,15 @@ irecv_device_t restore_get_irecv_device(struct idevicerestore_client_t* client)
  	}
 
  	plist_get_string_val(node, &model);
@@ -78,4 +78,3 @@ index e090594..9fcec8a 100644
 +
  	irecv_devices_get_device_by_hardware_model(model, &irecv_device);
  	free(model);
-
